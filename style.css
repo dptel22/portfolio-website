@@ -311,7 +311,7 @@ body.menu-open .hamburger-btn span:nth-child(3) {
 
 nav          { animation: fadeUp 0.5s ease both; }
 #hero .label { animation: slideUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.0s both; }
-h1           { } /* h1 itself has no animation — spans handle it */
+/* h1 itself has no animation — spans handle it */
 .hero-sub    { animation: slideUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.45s both; }
 .hero-ctas   { animation: slideUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.6s both; }
 .ticker      { animation: slideUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.75s both; }
