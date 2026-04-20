@@ -589,7 +589,7 @@ footer span {
   mix-blend-mode: difference;
   z-index: 9999;
   will-change: transform;
-  transition: transform 0.05s linear, width 0.2s ease, height 0.2s ease;
+  transition: transform 0.05s linear, width 0.2s ease, height 0.2s ease, top 0.2s ease, left 0.2s ease;
 }
 
 #cursor.cursor-hover {
@@ -610,7 +610,7 @@ footer span {
   pointer-events: none;
   z-index: 9998;
   will-change: transform;
-  transition: width 0.2s ease, height 0.2s ease, opacity 0.2s ease;
+  transition: width 0.2s ease, height 0.2s ease, opacity 0.2s ease, top 0.2s ease, left 0.2s ease;
 }
 
 #cursor-follower.follower-hover {
