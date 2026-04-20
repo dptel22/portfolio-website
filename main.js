@@ -11,19 +11,19 @@ window.addEventListener('resize', updateScrollProgress);
 updateScrollProgress();
 
 // 2. SCROLL REVEAL via IntersectionObserver
+const revealEls = document.querySelectorAll('.reveal');
 if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(el => {
-      if (el.isIntersecting) {
-        el.target.classList.add('visible');
-        observer.unobserve(el.target);
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        revealObserver.unobserve(e.target);
       }
     });
-  }, { threshold: 0.15 });
-
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => revealObserver.observe(el));
 } else {
-  document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+  revealEls.forEach(el => el.classList.add('visible'));
 }
 
 // 3. CUSTOM CURSOR (desktop only)
