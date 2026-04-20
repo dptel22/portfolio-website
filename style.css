@@ -319,13 +319,14 @@ nav          { animation: fadeUp 0.5s ease both; }
 /* About Section */
 #about {
   min-height: auto;
-  padding: 120px 0;
+  padding: 100px 0;
 }
 
 .about-grid {
   display: grid;
   grid-template-columns: 55% 45%;
   gap: 80px;
+  align-items: start;
 }
 
 blockquote {
@@ -352,13 +353,18 @@ blockquote {
 .tag {
   display: inline-block;
   font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  color: var(--muted);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  color: var(--fg);
   border: 1px solid var(--border);
-  padding: 4px 10px;
-  margin: 4px 4px 0 0;
+  padding: 8px 16px;
+  margin: 6px 6px 0 0;
   background: transparent;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.tag:hover {
+  border-color: var(--fg);
 }
 
 /* Projects Section */
@@ -376,8 +382,8 @@ blockquote {
   padding: 40px 0 40px 20px;
   cursor: pointer;
   transition: border-top-color 0.2s ease,
-              border-left-color 0.2s ease,
-              padding-left 0.2s ease;
+              border-left-color 0.25s ease,
+              padding-left 0.25s ease;
   text-decoration: none;
 }
 
@@ -392,7 +398,7 @@ blockquote {
   font-size: 28px;
   font-weight: 400;
   color: var(--fg);
-  transition: transform 0.2s ease;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   display: inline-block;
 }
 
@@ -583,6 +589,36 @@ footer span {
   mix-blend-mode: difference;
   z-index: 9999;
   will-change: transform;
+  transition: transform 0.05s linear, width 0.2s ease, height 0.2s ease;
+}
+
+#cursor.cursor-hover {
+  width: 20px;
+  height: 20px;
+  top: -10px;
+  left: -10px;
+}
+
+#cursor-follower {
+  position: fixed;
+  top: -20px;
+  left: -20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(252, 249, 243, 0.4);
+  pointer-events: none;
+  z-index: 9998;
+  will-change: transform;
+  transition: width 0.2s ease, height 0.2s ease, opacity 0.2s ease;
+}
+
+#cursor-follower.follower-hover {
+  width: 60px;
+  height: 60px;
+  top: -30px;
+  left: -30px;
+  opacity: 0.6;
 }
 
 body.has-custom-cursor,
