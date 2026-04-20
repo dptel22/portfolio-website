@@ -579,8 +579,8 @@ footer span {
 /* Custom Cursor */
 #cursor {
   position: fixed;
-  top: -6px;
-  left: -6px;
+  top: 0;
+  left: 0;
   width: 12px;
   height: 12px;
   border-radius: 50%;
@@ -589,20 +589,23 @@ footer span {
   mix-blend-mode: difference;
   z-index: 9999;
   will-change: transform;
-  transition: transform 0.05s linear, width 0.2s ease, height 0.2s ease, top 0.2s ease, left 0.2s ease;
+  opacity: 0;
+  transition: transform 0.05s linear, width 0.2s ease, height 0.2s ease, opacity 0.3s ease;
+}
+
+#cursor.cursor-visible {
+  opacity: 1;
 }
 
 #cursor.cursor-hover {
   width: 20px;
   height: 20px;
-  top: -10px;
-  left: -10px;
 }
 
 #cursor-follower {
   position: fixed;
-  top: -20px;
-  left: -20px;
+  top: 0;
+  left: 0;
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -610,14 +613,17 @@ footer span {
   pointer-events: none;
   z-index: 9998;
   will-change: transform;
-  transition: width 0.2s ease, height 0.2s ease, opacity 0.2s ease, top 0.2s ease, left 0.2s ease;
+  opacity: 0;
+  transition: width 0.2s ease, height 0.2s ease, opacity 0.3s ease;
+}
+
+#cursor-follower.cursor-visible {
+  opacity: 1;
 }
 
 #cursor-follower.follower-hover {
   width: 60px;
   height: 60px;
-  top: -30px;
-  left: -30px;
   opacity: 0.6;
 }
 

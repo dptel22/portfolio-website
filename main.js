@@ -52,17 +52,23 @@ if (
   document.body.classList.add('has-custom-cursor');
 
   let mx = 0, my = 0, fx = 0, fy = 0;
+  let cursorVisible = false;
 
   document.addEventListener('mousemove', e => {
     mx = e.clientX;
     my = e.clientY;
-    cursor.style.transform = `translate(${mx}px, ${my}px)`;
+    cursor.style.transform = `translate(${mx}px, ${my}px) translate(-50%, -50%)`;
+    if (!cursorVisible) {
+      cursorVisible = true;
+      cursor.classList.add('cursor-visible');
+      follower.classList.add('cursor-visible');
+    }
   });
 
   (function lerpFollower() {
     fx += (mx - fx) * 0.1;
     fy += (my - fy) * 0.1;
-    follower.style.transform = `translate(${fx}px, ${fy}px)`;
+    follower.style.transform = `translate(${fx}px, ${fy}px) translate(-50%, -50%)`;
     requestAnimationFrame(lerpFollower);
   })();
 
