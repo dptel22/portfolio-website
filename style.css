@@ -1,7 +1,7 @@
 :root {
   --bg: #0a0a0a;
   --fg: #fcf9f3;
-  --muted: #6b6860;
+  --muted: #a8a49e;
   --border: rgba(252, 249, 243, 0.1);
   --font-display: 'STIX Two Text', Georgia, serif;
   --font-mono: 'DM Mono', 'Courier New', monospace;
@@ -57,6 +57,10 @@ body {
   *, *::before, *::after {
     animation: none !important;
     transition: none !important;
+  }
+  .hero-line-1, .hero-line-2 {
+    opacity: 1 !important;
+    transform: none !important;
   }
   html {
     scroll-behavior: auto;
@@ -291,14 +295,33 @@ body.menu-open .hamburger-btn span:nth-child(3) {
   to   { opacity: 1; transform: translateY(0); }
 }
 
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-line-1 {
+  display: block;
+  animation: slideUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+}
+.hero-line-2 {
+  display: block;
+  animation: slideUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
+}
+
 nav          { animation: fadeUp 0.5s ease both; }
-#hero .label { animation: fadeUp 0.5s ease 0.15s both; }
-h1           { animation: fadeUp 0.6s ease 0.3s both; }
-.hero-sub    { animation: fadeUp 0.5s ease 0.45s both; }
-.hero-ctas   { animation: fadeUp 0.5s ease 0.6s both; }
-.ticker      { animation: fadeUp 0.5s ease 0.75s both; }
+#hero .label { animation: slideUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.0s both; }
+/* h1 itself has no animation — spans handle it */
+.hero-sub    { animation: slideUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.45s both; }
+.hero-ctas   { animation: slideUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.6s both; }
+.ticker      { animation: slideUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.75s both; }
 
 /* About Section */
+#about {
+  min-height: auto;
+  padding: 120px 0;
+}
+
 .about-grid {
   display: grid;
   grid-template-columns: 55% 45%;
@@ -349,14 +372,19 @@ blockquote {
   align-items: start;
   gap: 40px;
   border-top: 1px solid var(--border);
-  padding: 40px 0;
+  border-left: 2px solid transparent;
+  padding: 40px 0 40px 20px;
   cursor: pointer;
-  transition: border-top-color 0.2s ease;
+  transition: border-top-color 0.2s ease,
+              border-left-color 0.2s ease,
+              padding-left 0.2s ease;
   text-decoration: none;
 }
 
 .project-row:hover {
   border-top-color: var(--fg);
+  border-left-color: var(--fg);
+  padding-left: 28px;
 }
 
 .project-title {
@@ -369,7 +397,7 @@ blockquote {
 }
 
 .project-row:hover .project-title {
-  transform: translateX(6px);
+  transform: translateX(4px);
 }
 
 .proj-num {
@@ -532,8 +560,9 @@ footer span {
 /* Scroll Reveal */
 .reveal {
   opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
+  transform: translateY(32px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal.visible {
