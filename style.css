@@ -5,6 +5,7 @@
   --border: rgba(252, 249, 243, 0.1);
   --font-display: 'STIX Two Text', Georgia, serif;
   --font-mono: 'DM Mono', 'Courier New', monospace;
+  --nav-bg: rgba(10, 10, 10, 0.9);
 }
 
 /* Reset & Accessibility */
@@ -125,7 +126,7 @@ nav {
   right: 0;
   height: 64px;
   z-index: 100;
-  background: rgba(10,10,10,0.9);
+  background: var(--nav-bg);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
   display: flex;
@@ -555,10 +556,11 @@ footer span {
   will-change: transform;
 }
 
-@media (hover: hover) {
-  body, a, button {
-    cursor: none;
-  }
+body.has-custom-cursor,
+body.has-custom-cursor a,
+body.has-custom-cursor button {
+  cursor: none;
+}
 }
 
 /* Mobile Responsive */
@@ -602,4 +604,12 @@ footer span {
   nav {
     padding: 0 24px;
   }
+}
+
+.project-subtitle {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  margin-top: 4px;
 }
