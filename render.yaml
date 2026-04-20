@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: dhruv-portfolio
+    runtime: static
+    branch: main
+    staticPublishPath: .
+    pullRequestPreviewsEnabled: true
