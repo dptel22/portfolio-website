@@ -1,17 +1,26 @@
-// 1. SCROLL PROGRESS BAR
-const progress = document.getElementById('progress');
-function updateScrollProgress() {
-  const scrollableHeight = document.body.scrollHeight - window.innerHeight;
-  const pct = scrollableHeight > 0 
-    ? (window.scrollY / scrollableHeight) * 100 : 0;
-  progress.style.width = pct + '%';
+// 1. SCROLL PROGRESS BAR & NAV BLUR
+const navEl = document.querySelector('nav');
+const progressBar = document.getElementById('progress');
+
+function onScroll() {
+  if (progressBar) {
+    const scrollable = document.body.scrollHeight - window.innerHeight;
+    progressBar.style.width = scrollable > 0
+      ? (window.scrollY / scrollable) * 100 + '%' : '0%';
+  }
+  const pastHero = window.scrollY > 80;
+  navEl.style.background = pastHero
+    ? 'rgba(10,10,10,0.95)' : 'rgba(10,10,10,0.6)';
+  navEl.style.backdropFilter = pastHero ? 'blur(20px)' : 'blur(6px)';
+  navEl.style.borderBottomColor = pastHero
+    ? 'rgba(252,249,243,0.1)' : 'transparent';
 }
-window.addEventListener('scroll', updateScrollProgress);
-window.addEventListener('resize', updateScrollProgress);
-updateScrollProgress();
+
+window.addEventListener('scroll', onScroll, { passive: true });
+window.addEventListener('resize', onScroll, { passive: true });
+onScroll();
 
 // 2. SCROLL REVEAL via IntersectionObserver
-const revealEls = document.querySelectorAll('.reveal');
 if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(e => {
@@ -21,9 +30,10 @@ if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       }
     });
   }, { threshold: 0.12 });
-  revealEls.forEach(el => revealObserver.observe(el));
+
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 } else {
-  revealEls.forEach(el => el.classList.add('visible'));
+  document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
 }
 
 // 3. CUSTOM CURSOR (desktop only)
@@ -34,21 +44,44 @@ if (
   const cursor = document.createElement('div');
   cursor.id = 'cursor';
   document.body.appendChild(cursor);
+
+  const follower = document.createElement('div');
+  follower.id = 'cursor-follower';
+  document.body.appendChild(follower);
+
   document.body.classList.add('has-custom-cursor');
 
-  let mx = 0, my = 0, cx = 0, cy = 0;
+  let mx = 0, my = 0, fx = 0, fy = 0;
+  let cursorVisible = false;
 
   document.addEventListener('mousemove', e => {
     mx = e.clientX;
     my = e.clientY;
+    cursor.style.transform = `translate(${mx}px, ${my}px) translate(-50%, -50%)`;
+    if (!cursorVisible) {
+      cursorVisible = true;
+      cursor.classList.add('cursor-visible');
+      follower.classList.add('cursor-visible');
+    }
   });
 
-  (function lerp() {
-    cx += (mx - cx) * 0.12;
-    cy += (my - cy) * 0.12;
-    cursor.style.transform = `translate(${cx}px, ${cy}px)`;
-    requestAnimationFrame(lerp);
+  (function lerpFollower() {
+    fx += (mx - fx) * 0.1;
+    fy += (my - fy) * 0.1;
+    follower.style.transform = `translate(${fx}px, ${fy}px) translate(-50%, -50%)`;
+    requestAnimationFrame(lerpFollower);
   })();
+
+  document.querySelectorAll('a, button, .project-row').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.classList.add('cursor-hover');
+      follower.classList.add('follower-hover');
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.classList.remove('cursor-hover');
+      follower.classList.remove('follower-hover');
+    });
+  });
 }
 
 // 4. MOBILE MENU toggle (vanilla JS)
