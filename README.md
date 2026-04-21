@@ -1,8 +1,8 @@
 # Dhruv Patel — Portfolio
 Personal portfolio website targeting MLH Fellowship and AI/ML internships.
 
-## 🌐 Live Site
-[Render URL — to be added after deployment]
+## 🌐 Live Site:
+https://portfolio-website-cu4s.onrender.com/
 
 ## Local Development
 ```bash
