@@ -367,8 +367,19 @@ footer span { font-family: var(--font-mono); font-size:0.6875rem; color: var(--m
 @keyframes reveal-safety { to { opacity: 1; transform: translateY(0); } }
 .reveal { animation: reveal-safety 0s 3s forwards; }
 .reveal.visible { animation: none; }
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.85s var(--ease-out), transform 0.85s var(--ease-out);
+  will-change: opacity, transform;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .reveal { animation: none; opacity: 1; transform: none; }
+  .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
 }
 
 /* Custom cursor */
@@ -413,14 +424,60 @@ body.has-custom-cursor, body.has-custom-cursor a, body.has-custom-cursor button 
   h1 { font-size: 9rem; }
 }
 
-/* Print — recruiters print portfolios */
-@media print {
-  #progress, nav, .ticker, #cursor, #cursor-follower, .hamburger-btn, #menu-overlay, .skip-link { display:none !important; }
-  body { background:#fff; color:#000; display:block; }
-  section { min-height:auto; padding: 1.5rem 0; border-color:#ccc; page-break-inside: avoid; }
-  .reveal { opacity:1 !important; transform:none !important; }
-  a { color:#000; text-decoration:underline; }
-  .project-row { border-color:#ccc !important; padding-left: 0 !important; }
-  .project-row:hover { padding-left: 0 !important; }
-  .muted, .muted-faint, [class*="muted"] { color:#555 !important; }
+/* Interactive Case Study Accordion & SVG Diagrams */
+details.project-row { list-style: none; }
+details.project-row summary::-webkit-details-marker { display: none; }
+.project-summary {
+  display: grid; grid-template-columns: 4rem 1fr auto;
+  align-items: start; gap: clamp(1.25rem, 4vw, 2.5rem);
+  cursor: pointer; outline: none;
+}
+
+.project-toggle {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.08em;
+  color: var(--muted); padding: 0.4rem 0.85rem; border: 1px solid var(--border);
+  background: transparent; transition: all var(--dur) var(--ease-out);
+}
+.project-row:hover .project-toggle, details.project-row[open] .project-toggle {
+  color: var(--fg); border-color: var(--border-strong); background: var(--surface);
+}
+details.project-row[open] .toggle-icon { transform: rotate(45deg); }
+.toggle-icon { display: inline-block; transition: transform var(--dur) var(--ease-out); }
+
+.case-study {
+  margin-top: 2rem; padding-top: 2rem; border-top: 1px dashed var(--border);
+  animation: fadeUp 0.4s var(--ease-out) both;
+}
+.cs-grid {
+  display: grid; grid-template-columns: 1.2fr 0.8fr;
+  gap: clamp(2rem, 4vw, 3.5rem); align-items: start;
+}
+.cs-fields { display: flex; flex-direction: column; gap: 1.5rem; }
+.cs-field { display: flex; flex-direction: column; gap: 0.35rem; }
+.cs-field-label {
+  font-family: var(--font-mono); font-size: 0.6875rem; text-transform: uppercase;
+  letter-spacing: 0.14em; color: var(--muted);
+}
+.cs-field-body { font-family: var(--font-body); font-size: 0.9375rem; color: var(--fg-soft); line-height: 1.65; }
+
+.cs-diagram {
+  background: var(--surface); border: 1px solid var(--border);
+  padding: 1.5rem; display: flex; align-items: center; justify-content: center;
+}
+.arch-diagram { width: 100%; height: auto; color: var(--fg); }
+.arch-text { font-family: var(--font-mono); font-size: 11px; fill: var(--fg); font-weight: 500; }
+.arch-text-sm { font-family: var(--font-mono); font-size: 9px; fill: var(--muted); }
+
+.cs-repo-link {
+  display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 1.75rem;
+  font-family: var(--font-mono); font-size: 0.8125rem; color: var(--fg);
+  text-decoration: none; border: 1px solid var(--border-strong); padding: 0.6rem 1.25rem;
+  background: var(--bg-elevated); transition: all var(--dur-fast) var(--ease-out);
+}
+.cs-repo-link:hover { border-color: var(--fg); background: var(--surface); transform: translateY(-2px); }
+
+@media (max-width: 900px) {
+  .cs-grid { grid-template-columns: 1fr; }
+  .project-summary { grid-template-columns: 2.5rem 1fr; }
 }

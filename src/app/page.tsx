@@ -270,8 +270,8 @@ const PROJECTS: Project[] = [
     ],
     summary:
       "4-class road defect detection (longitudinal, transverse, alligator, pothole) via YOLOv11n. Two-stage rehearsal curriculum — RDD2022 global foundation (26.8k images) → IIT Madras fine-tune (11.5k images). Severity scoring maps defect type × bounding-box area against active municipal road contracts to flag DLP violations. FastAPI + SQLite + Streamlit dashboard.",
-    repoHref: "https://github.com/dptel22",
-    repoLabel: "github.com/dptel22/aria",
+    repoHref: "https://github.com/dptel22/A.R.I.A",
+    repoLabel: "github.com/dptel22/A.R.I.A",
     fields: [
       {
         label: "Problem",
@@ -320,8 +320,8 @@ const PROJECTS: Project[] = [
     ],
     summary:
       "Self-healing Kubernetes platform. Anomaly detection on Prometheus telemetry using Isolation Forest + Z-Score — detects pod degradation before hard failures. Automated pod recovery via FastAPI orchestration. React + Recharts real-time cluster-health dashboard. Built end-to-end in 48 hours at MIT Bangalore Hackathon.",
-    repoHref: "https://github.com/dptel22",
-    repoLabel: "github.com/dptel22/resolve",
+    repoHref: "https://github.com/dptel22/Resolve-MIT-hackthon",
+    repoLabel: "github.com/dptel22/Resolve-MIT-hackthon",
     fields: [
       {
         label: "Problem",
@@ -370,8 +370,8 @@ const PROJECTS: Project[] = [
     ],
     summary:
       "Maternal health risk prediction on the UCI dataset. XGBoost classifier on 6 vitals with SHAP explainability — surfaces which clinical features drive each prediction. Built for clinicians who need to understand the why, not just the output. FastAPI + React + Vite. 3rd place at DevCraft hackathon.",
-    repoHref: "https://github.com/dptel22",
-    repoLabel: "github.com/dptel22/maternalguard",
+    repoHref: "https://github.com/dptel22/Resolve-MIT-hackthon",
+    repoLabel: "github.com/dptel22/Resolve-MIT-hackthon",
     fields: [
       {
         label: "Problem",
@@ -600,7 +600,7 @@ export default function Home() {
                   </div>
                 </div>
                 <a
-                  href="https://github.com/dptel22"
+                  href="https://github.com/dptel22/A.R.I.A"
                   target="_blank"
                   rel="noopener"
                   className="project-arrow"
@@ -653,7 +653,7 @@ export default function Home() {
                   </div>
                 </div>
                 <a
-                  href="https://github.com/dptel22"
+                  href="https://github.com/dptel22/Resolve-MIT-hackthon"
                   target="_blank"
                   rel="noopener"
                   className="project-arrow"
@@ -706,7 +706,7 @@ export default function Home() {
                   </div>
                 </div>
                 <a
-                  href="https://github.com/dptel22"
+                  href="https://github.com/dptel22/Resolve-MIT-hackthon"
                   target="_blank"
                   rel="noopener"
                   className="project-arrow"
